@@ -5,8 +5,6 @@ async function handle(conn: Deno.Conn) {
     const url = new URL(requestEvent.request.url);
     const p=url.pathname;
     const mime=String(mimetypes[p.substr(p.lastIndexOf('.')+1)]);
-    console.log(`path: ${p}`);
-    // do we serve a file or generate a dynamic page?
     if(p=='/favicon.ico' || p=='/robots.txt' || p.substr(0,7)=='/static') {
       const buf=await Deno.readFile("."+p);
       await requestEvent.respondWith(
